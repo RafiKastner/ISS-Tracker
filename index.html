@@ -24,9 +24,14 @@
     <p>longitude: <span id="long"></span><br /> </p>
     <div id="map"></div>
     <script>
-        
         const api_url = 'https://api.wheretheiss.at/v1/satellites/25544'
         const map = L.map('map').setView([0,0],4);
+        const icon = L.icon({
+            iconURL: 'ISS320px.png',
+            iconSize: [50, 32],
+            iconAnchor: [25, 16]
+        });
+        const marker = L.marker([0, 0], { icon: icon }).addTo(map);
 
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
@@ -42,7 +47,7 @@
             document.getElementById('lat').textContent = latitude;
             document.getElementById('long').textContent = longitude;
 
-            L.marker([latitude, longitude]).addTo(map);
+            marker.setLatLng([latitude, longitude]);
         }
     </script>
 </body>

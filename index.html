@@ -33,7 +33,7 @@
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map);
 
-        getData();
+        getData(); 
         async function getData() {
             const response = await fetch(api_url);
             const data = await response.json();

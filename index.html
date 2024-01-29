@@ -20,16 +20,19 @@
 </head>
 <body>
     <h1>ISS Position</h1>
-    <p>latitude: <span id="lat"></span><br /> </p>
-    <p>longitude: <span id="long"></span><br /> </p>
+    <p>latitude: <span id="lat"></span>°<br /> </p>
+    <p>longitude: <span id="long"></span>°<br /> </p>
     <div id="map"></div>
     <script>
         const api_url = 'https://api.wheretheiss.at/v1/satellites/25544'
         const map = L.map('map').setView([0,0],4);
+        //const bounds = new L.latLngBounds(new latLng(), new latLng())
         const icon = L.icon({
-            iconURL: 'ISS320px.png',
+            iconUrl: 'ISS320px.png',
             iconSize: [50, 32],
-            iconAnchor: [25, 16]
+            iconAnchor: [25, 16],
+            //maxBounds: bounds,
+            maxBoundsViscosity: 1.0
         });
         const marker = L.marker([0, 0], { icon: icon }).addTo(map);
 
@@ -39,15 +42,22 @@
         }).addTo(map);
 
         getData(); 
+        setInterval(getData, 1000);
+
+        let firstTime = true;
         async function getData() {
             const response = await fetch(api_url);
             const data = await response.json();
             const { latitude, longitude } = data;
 
-            document.getElementById('lat').textContent = latitude;
-            document.getElementById('long').textContent = longitude;
+            document.getElementById('lat').textContent = latitude.toFixed(2);
+            document.getElementById('long').textContent = longitude.toFixed(2);
 
             marker.setLatLng([latitude, longitude]);
+            if (firstTime) {
+                firstTime = false;
+                map.setView([latitude, longitude]); 
+            }
         }
     </script>
 </body>

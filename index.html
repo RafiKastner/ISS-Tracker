@@ -25,11 +25,11 @@
     <div id="map"></div>
     <script>
         const api_url = 'https://api.wheretheiss.at/v1/satellites/25544'
-        const bounds = L.latLngBounds(L.latLng(-85, 180), L.latLng(85, -180));
+        const bounds = L.latLngBounds(L.latLng(-85, Infinity), L.latLng(85, -Infinity));
         const map = L.map('map', {
             minZoom: 2,
             maxBounds: bounds,
-            maxBoundsViscosity: 1.0
+            maxBoundsViscosity: 1
         }).setView([0,0],4);
         const icon = L.icon({
             iconUrl: 'ISS320px.png',

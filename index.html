@@ -42,8 +42,7 @@
             document.getElementById('lat').textContent = latitude;
             document.getElementById('long').textContent = longitude;
 
-            l.marker([latitude, longitude]).addTo(map);
-            l.map('map').setView([latitude, longitude], 1);
+            L.marker([latitude, longitude]).addTo(map);
         }
     </script>
 </body>

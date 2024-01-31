@@ -14,6 +14,10 @@
         #map {
             height: 540px;
         }
+        #map-container {
+            height: 100%;
+            width: 100%;
+        }
     </style>
 
     <title>ISS Tracker</title>
@@ -22,7 +26,9 @@
     <h1>ISS Position</h1>
     <p>latitude: <span id="lat"></span>°<br /> </p>
     <p>longitude: <span id="long"></span>°<br /> </p>
-    <div id="map"></div>
+    <div id ="map-container">
+        <div id="map"></div>
+    </div>
     <script>
         const api_url = 'https://api.wheretheiss.at/v1/satellites/25544'
         const bounds = L.latLngBounds(L.latLng(-85, Infinity), L.latLng(85, -Infinity));
@@ -31,6 +37,7 @@
             maxBounds: bounds,
             maxBoundsViscosity: 1
         }).setView([0,0],4);
+        
         const icon = L.icon({
             iconUrl: 'ISS320px.png',
             iconSize: [50, 32],
